@@ -1,0 +1,55 @@
+RewriteEngine on
+
+ErrorDocument 404 /error.php
+
+
+# -------- adm subdomain ------------------------------------
+
+RewriteCond  %{HTTP_HOST}  sitea.pyur.ru
+RewriteRule ^e\/(\w+\/){1,2}$  embed.php [L]
+
+RewriteCond  %{HTTP_HOST}  sitea.pyur.ru
+RewriteRule ^i\/[\w\-]+$  file.php [L]
+RewriteCond  %{HTTP_HOST}  sitea.pyur.ru
+RewriteRule ^f\/[\w\-]+$  file.php [L]
+
+#RewriteCond  %{HTTP_HOST}  sitea.pyur.ru
+#RewriteRule ^s\/(\w+)\/$  m/$1/style.css [L]
+
+#RewriteCond  %{HTTP_HOST}  sitea.pyur.ru
+#RewriteRule ^j\/(\w+)\/$  m/$1/script.js [L]
+
+RewriteCond  %{HTTP_HOST}  sitea.pyur.ru
+RewriteRule ^(\w+\/){0,2}$  main.php [L]
+
+
+# -------- public subdomain ------------------------------------
+
+
+RewriteCond  %{HTTP_HOST}  site.pyur.ru
+RewriteRule ^i\/[\w\-\.]+$  file.php [L]
+RewriteCond  %{HTTP_HOST}  site.pyur.ru
+RewriteRule ^f\/[\w\-\.]+$  file.php [L]
+
+RewriteCond  %{HTTP_HOST}  site.pyur.ru
+RewriteRule  ^favicon.ico$  2favicon.ico [L]
+
+RewriteCond  %{HTTP_HOST}  site.pyur.ru
+RewriteRule  ^s.css$  2s.css [L]
+
+RewriteCond  %{HTTP_HOST}  site.pyur.ru
+RewriteRule  ^robots.txt$  2robots.txt [L]
+
+RewriteCond  %{HTTP_HOST}  site.pyur.ru
+RewriteRule  ^$  2main.php [L]
+RewriteCond  %{HTTP_HOST}  site.pyur.ru
+RewriteRule  ^[\w\-]+$  2main.php [L]
+
+
+RewriteCond  %{HTTP_HOST}  site.pyur.ru
+RewriteCond  %{REQUEST_URI}  !=/file.php
+RewriteCond  %{REQUEST_URI}  !=/2favicon.ico
+RewriteCond  %{REQUEST_URI}  !=/2s.css
+RewriteCond  %{REQUEST_URI}  !=/2robots.txt
+RewriteCond  %{REQUEST_URI}  !=/2main.php
+RewriteRule  ^.*$  error.php [L]
